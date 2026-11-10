@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>ProofPass — Internship Verification</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="navbar">
+      <a class="brand" href="#">
+        <span class="brand-mark">P</span>
+        <span>
+          <strong>ProofPass</strong>
+          <small>Internship verification</small>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <button class="nav-link active" data-view="verifyView">Verify</button>
+        <button class="nav-link" data-view="issueView">Issue</button>
+        <button class="nav-link" data-view="myView">My Internships</button>
+      </nav>
+
+      <button id="connectBtn" class="wallet-btn">
+        <span class="wallet-dot"></span>
+        Connect Wallet
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> Secured on Ethereum Sepolia</div>
+          <h1>Proof that your<br><span>internship happened.</span></h1>
+          <p>
+            Issue, own and verify internship records with a tamper-resistant
+            blockchain proof. No screenshots. No guesswork.
+          </p>
+
+          <div class="hero-actions">
+            <button class="primary-btn" data-view-target="verifyView">Verify an Internship <span>→</span></button>
+            <button class="ghost-btn" data-view-target="issueView">Issue a Proof</button>
+          </div>
+
+          <div class="trust-row">
+            <div><strong>On-chain</strong><span>Permanent record</span></div>
+            <i></i>
+            <div><strong>Public</strong><span>Independently verifiable</span></div>
+            <i></i>
+            <div><strong>Wallet-based</strong><span>Identity by address</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="card-top">
+            <span class="mini-label">LIVE VERIFICATION</span>
+            <span class="status-badge active"><span></span> VERIFIED</span>
+          </div>
+          <div class="proof-id">#<span id="heroProofId">001</span></div>
+          <div class="hero-company">TechNova Solutions</div>
+          <div class="hero-role">Data Analyst Intern</div>
+          <div class="hero-meta">
+            <div><span>Student</span><strong>0x7A...91F2</strong></div>
+            <div><span>Duration</span><strong>01 Jun — 30 Jun 2026</strong></div>
+          </div>
+          <div class="verified-line">
+            <span class="check">✓</span>
+            <span>Record verified on Sepolia</span>
+            <span class="line"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">BLOCKCHAIN RECORD</span>
+            <h2>Check an internship</h2>
+          </div>
+          <span id="networkPill" class="network-pill">Sepolia • Read-only</span>
+        </div>
+
+        <div id="alertBox" class="alert hidden"></div>
+
+        <!-- VERIFY -->
+        <section id="verifyView" class="view active-view">
+          <div class="verify-panel">
+            <div class="search-box">
+              <label for="verifyId">Internship ID</label>
+              <div class="input-row">
+                <span class="hash-prefix">#</span>
+                <input id="verifyId" type="number" min="1" placeholder="Enter internship ID, e.g. 1" />
+                <button id="verifyBtn" class="primary-btn">Verify</button>
+              </div>
+              <p class="helper">Anyone can verify a ProofPass record. A wallet is not required.</p>
+            </div>
+
+            <div id="verificationResult" class="empty-result">
+              <div class="empty-icon">✓</div>
+              <h3>Ready to verify</h3>
+              <p>Enter an internship ID to retrieve its blockchain-backed record.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ISSUE -->
+        <section id="issueView" class="view">
+          <div class="form-grid">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="eyebrow">AUTHORIZED ISSUER</span>
+                  <h3>Issue internship proof</h3>
+                </div>
+                <span id="issuerStatus" class="small-status">Wallet required</span>
+              </div>
+
+              <form id="issueForm">
+                <div class="field">
+                  <label>Student wallet address</label>
+                  <input id="studentAddress" required placeholder="0x..." />
+                </div>
+
+                <div class="two-col">
+                  <div class="field">
+                    <label>Company name</label>
+                    <input id="companyName" required placeholder="e.g. TechNova Solutions" />
+                  </div>
+                  <div class="field">
+                    <label>Role</label>
+                    <input id="role" required placeholder="e.g. Data Analyst Intern" />
+                  </div>
+                </div>
+
+                <div class="two-col">
+                  <div class="field">
+                    <label>Start date</label>
+                    <input id="startDate" type="date" required />
+                  </div>
+                  <div class="field">
+                    <label>End date</label>
+                    <input id="endDate" type="date" required />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Project / work description</label>
+                  <textarea id="projectDescription" rows="4" required placeholder="Briefly describe the student's work..."></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn wide">Issue Internship on Blockchain <span>→</span></button>
+              </form>
+            </div>
+
+            <aside class="side-panel">
+              <div class="side-icon">✦</div>
+              <h3>What gets recorded?</h3>
+              <ul>
+                <li><span>01</span> Student wallet</li>
+                <li><span>02</span> Company & role</li>
+                <li><span>03</span> Internship dates</li>
+                <li><span>04</span> Project description</li>
+                <li><span>05</span> Issuer & timestamp</li>
+              </ul>
+              <div class="side-note">Every issued record receives a unique internship ID.</div>
+            </aside>
+          </div>
+
+          <div id="issuerAdminPanel" class="panel admin-panel hidden">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">OWNER ONLY</span>
+                <h3>Authorize an issuer</h3>
+              </div>
+              <span class="small-status">Contract owner</span>
+            </div>
+            <div class="input-row">
+              <input id="issuerAddress" placeholder="Company / organization wallet address" />
+              <button id="authorizeBtn" class="primary-btn">Authorize</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MY INTERNSHIPS -->
+        <section id="myView" class="view">
+          <div class="my-header">
+            <div>
+              <span class="eyebrow">YOUR WALLET</span>
+              <h2>My internship proofs</h2>
+              <p>Internships issued to the wallet currently connected to ProofPass.</p>
+            </div>
+            <button id="refreshMyBtn" class="ghost-btn">↻ Refresh</button>
+          </div>
+
+          <div id="myInternships" class="internship-list">
+            <div class="empty-result compact">
+              <div class="empty-icon">⌁</div>
+              <h3>Connect your wallet</h3>
+              <p>Your internship proofs will appear here.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <span>ProofPass</span>
+      <span>Blockchain-Based Internship Verification</span>
+      <span>Ethereum Sepolia</span>
+    </footer>
+  </div>
+
+  <div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="loader-card">
+      <div class="spinner"></div>
+      <h3 id="loadingTitle">Processing transaction</h3>
+      <p id="loadingText">Please confirm the transaction in MetaMask.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
